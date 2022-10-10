@@ -4,11 +4,12 @@ using UnityEngine;
 using TMPro;
 
 public class FoodLabel : MonoBehaviour
-{
+{  
+    [SerializeField] RuntimeData _runtimeData;
 
     // Update is called once per frame
     void Update()
     {
-        GetComponent<TextMeshProUGUI>().text = "Yummy FOOD!";
+            GetComponent<TextMeshProUGUI>().text = _runtimeData.CurrentFoodMousedOver;
     }
 }

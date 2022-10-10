@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] RuntimeData _runtimeData;
     [SerializeField] float _mouseSensitivity = 10f;
     [SerializeField] float _moveSpeed = 10f;
     [SerializeField] Camera _camera;
@@ -17,8 +18,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update() {
         FirstPersonCamera();
-        Movement();
-
+        if (_runtimeData.CurrentGameplayState == GameplayState.FreeWalk) {
+            Movement();   
+        }
     }
 
     void FirstPersonCamera() {
