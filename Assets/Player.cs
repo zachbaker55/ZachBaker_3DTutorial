@@ -8,8 +8,25 @@ public class Player : MonoBehaviour
     [SerializeField] float _mouseSensitivity = 10f;
     [SerializeField] float _moveSpeed = 10f;
     [SerializeField] Camera _camera;
+
+    public float strengthStat = 0f;
+    public float speedStat = 0f;
+
     float _currentTilt = 0f;
-    // Start is called before the first frame update
+
+    void Awake() {
+        GameEvents.StatIncrease += OnStatIncrease;
+    }
+
+    void OnStatIncrease(object sender, StatEventArgs args){
+        if (args.statType == "speed"){
+            speedStat += args.statIncrease;
+        } 
+        if (args.statType == "strength"){
+            strengthStat += args.statIncrease;
+        } 
+    }
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -39,7 +56,7 @@ public class Player : MonoBehaviour
         Vector3 frontbackMovementVector = transform.forward*Input.GetAxis("Vertical");
         Vector3 movementVector = sidewaysMovementVector + frontbackMovementVector;
 
-        GetComponent<CharacterController>().Move(movementVector * _moveSpeed * Time.deltaTime);
+        GetComponent<CharacterController>().Move(movementVector * (_moveSpeed + speedStat) * Time.deltaTime);
 
     }
 }

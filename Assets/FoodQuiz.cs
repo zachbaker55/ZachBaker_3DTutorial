@@ -19,9 +19,11 @@ public class FoodQuiz : MonoBehaviour
 
         if (food == _correctFood) {
             GameEvents.InvokeDialogInitiated(_correctChoiceDialogue);
+            GameEvents.InvokeStatIncrease("speed",5);
         } else {
             GameEvents.InvokeDialogInitiated(_incorrectChoiceDialogue);
         }
         Destroy(food);
+        GameEvents.InvokeStatIncrease("strength",2);
     }
 }
